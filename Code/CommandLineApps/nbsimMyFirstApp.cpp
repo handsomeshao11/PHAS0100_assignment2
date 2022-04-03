@@ -19,33 +19,48 @@
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
 #include <unsupported/Eigen/NonLinearOptimization>
+// reading the SolarSystemData
+#include "nbsimSolarSystemData.ipp"
+// 
+#include "nbsimBasicTypes.h"
 
 /**
  * \brief Demo file to check that includes and library linkage is correct.
  */
 int main(int argc, char** argv)
 {
+  // 读取 data
+  // int ibody = 0;
+  // std::cout << nbsim::solarSystemData.at(ibody).name << std::endl;
+  // std::cout << nbsim::solarSystemData.at(ibody).mu << std::endl;
+  // std::cout << nbsim::solarSystemData.at(ibody).position << std::endl;
+  // std::cout << nbsim::solarSystemData.at(ibody).velocity << std::endl;
 
-  int returnStatus = EXIT_FAILURE;
+  Eigen::Vector3d a(0,0,0);
+  nbsim::particle k1;
+  // a << nbsim::solarSystemData.at(0).position;
+  // std::cout << a << std::endl;
+  k1.position << a;
+  std::cout << k1.getPosition() << std::endl;
 
-  try
-  {
 
-    Eigen::MatrixXd m(2,2);
-    std::cout << "Printing 2x2 Eigen::MatrixXd ..." << std::endl << m << std::endl;
 
-    std::cout << "Calculating ... " << nbsim::MyFirstAddFunction(1, 2) << std::endl;
+  return 0;
+}
 
-    returnStatus = EXIT_SUCCESS;
-  }
-  catch (nbsim::Exception& e)
-  {
-    std::cerr << "Caught nbsim::Exception: " << e.GetDescription() << std::endl;
-  }
-  catch (std::exception& e)
-  {
-    std::cerr << "Caught std::exception: " << e.what() << std::endl;
-  }
+int other()
+{
+/*   double mu;
+                    std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodieslist;
+                    Eigen::Vector3d pos, vel;
+                    for (auto body : nbsim::solarSystemData)
+                    {
+                        mu = body.mu;
+                        pos = body.position;
+                        vel = body.velocity;
 
-  return returnStatus;
+                        std::shared_ptr<nbsim::MassiveParticle> ptr_body(new nbsim::MassiveParticle(pos, vel, mu));
+                        bodieslist.push_back(ptr_body);
+                    } */
+  return 0;
 }
