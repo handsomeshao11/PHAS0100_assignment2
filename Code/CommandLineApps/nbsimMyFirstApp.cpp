@@ -15,6 +15,8 @@
 #include <nbsimMyFunctions.h>
 #include <nbsimExceptionMacro.h>
 #include <iostream>
+#include <stdlib.h>
+#include <vector>
 
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
@@ -36,13 +38,52 @@ int main(int argc, char** argv)
   // std::cout << nbsim::solarSystemData.at(ibody).position << std::endl;
   // std::cout << nbsim::solarSystemData.at(ibody).velocity << std::endl;
 
-  Eigen::Vector3d a(0,0,0);
-  nbsim::particle k1;
+  Eigen::Vector3d pos(1,0,0);
+  Eigen::Vector3d vel(1,0,0);
+  const Eigen::Vector3d acc(2,0,0);
+
+  nbsim::Particle k1;
   // a << nbsim::solarSystemData.at(0).position;
   // std::cout << a << std::endl;
-  k1.position << a;
-  std::cout << k1.getPosition() << std::endl;
+  k1.position << pos;
+  k1.velocity << vel;
+  double k=1.0;
+  // std::cout << k1.getPosition() << std::endl;
+  k1.integrateTimestep(acc,k);
+  // std::cout << k1.getPosition() << std::endl;
+  // std::cout << k1.getVelocity() << std::endl;
 
+  // std::string kk=typeid(k1);
+  std::cout << typeid(k1).name() << std::endl;
+  std::cout <<acc << std::endl;
+
+  nbsim::MassiveParticle x1;
+  nbsim::MassiveParticle x2;
+
+  x1.Mu=1;
+  x2.Mu=1;
+
+  x1.position<<1.,.0,.0;
+  x2.position<<-1.,.0,.0;
+
+  x1.velocity<<.0,0.5,.0;
+  x2.velocity<<.0,-0.5,.0;
+
+  x1.addAttractor(x2);
+  x2.addAttractor(x1);
+
+  x1.calculateAcceleration();
+  x2.calculateAcceleration();
+  std::cout <<"x1 :acc "<<x1.acc << std::endl;
+  x1.integrateTimestep(1.0);
+  x2.integrateTimestep(1.0);
+  std::cout <<"x1 :position "<<x1.position << std::endl;
+  std::cout <<"x1 :vel "<<x1.velocity << std::endl;
+
+
+
+  
+  std::cout<<sqrt((x1.position-x2.position).dot(x1.position-x2.position))<<std::endl;
 
 
   return 0;

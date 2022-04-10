@@ -299,7 +299,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations"
+			"value" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS_DEBUG",

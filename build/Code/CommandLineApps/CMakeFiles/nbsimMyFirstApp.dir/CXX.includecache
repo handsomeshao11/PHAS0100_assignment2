@@ -1075,6 +1075,8 @@ unsupported/Eigen/NonLinearOptimization
 -
 stdlib.h
 -
+vector
+-
 
 ../Code/Lib/nbsimException.h
 stdexcept
@@ -1104,6 +1106,10 @@ nbsimMyFunctions.h
 nbsimExceptionMacro.h
 -
 iostream
+-
+stdlib.h
+-
+vector
 -
 Eigen/Dense
 -

@@ -360,28 +360,28 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "nbsimBasicTest::@ea41f389d6241025cb5e",
-					"jsonFile" : "target-nbsimBasicTest-Debug-d4022e4ebcd363ebe12e.json",
+					"jsonFile" : "target-nbsimBasicTest-Debug-ea9a6dffe1440e9d882c.json",
 					"name" : "nbsimBasicTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "nbsimCommandLineArgsTest::@ea41f389d6241025cb5e",
-					"jsonFile" : "target-nbsimCommandLineArgsTest-Debug-1582aa88c6c7e3977fc4.json",
+					"jsonFile" : "target-nbsimCommandLineArgsTest-Debug-d0fd31ea911ba368a330.json",
 					"name" : "nbsimCommandLineArgsTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "nbsimMyFirstApp::@b89039883a6cad3d0086",
-					"jsonFile" : "target-nbsimMyFirstApp-Debug-5c091cd3ccd3e77e8da8.json",
+					"jsonFile" : "target-nbsimMyFirstApp-Debug-0c05f1e4076de5b2ad6d.json",
 					"name" : "nbsimMyFirstApp",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "phas0100assignment2::@fa14c79d6de89ebc8e0e",
-					"jsonFile" : "target-phas0100assignment2-Debug-3cd5a33ccfa7f3d92101.json",
+					"jsonFile" : "target-phas0100assignment2-Debug-ca3b0013ea25e67ff5b6.json",
 					"name" : "phas0100assignment2",
 					"projectIndex" : 0
 				}

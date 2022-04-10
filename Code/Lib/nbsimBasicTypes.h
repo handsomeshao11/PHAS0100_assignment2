@@ -46,23 +46,43 @@
 #include <Eigen/Dense>
 #include <unsupported/Eigen/NonLinearOptimization>
 #include <stdlib.h>
+#include <vector>
 namespace nbsim
 {
   void acc_not_zero(Eigen::Vector3d acceleration); // check acceleration is not 0
+  void acc_is_const(Eigen::Vector3d acceleration); // check acceleration is const
 
-  class particle
+  
+
+  class Particle
   {
-    private:
-
     public:
-    particle(){};
+    Particle(){};
     Eigen::Vector3d position;
     Eigen::Vector3d velocity;
+    Eigen::Vector3d acc;
     Eigen::Vector3d getPosition(); // return position
     Eigen::Vector3d getVelocity(); // return velocity
     void integrateTimestep(Eigen::Vector3d acceleration, double timestep);
 
   };
+
+  class MassiveParticle : public Particle 
+  {
+    private:
+    double G = 6.6743e-11; // units m3 kg-1 s-2 
+
+    public:
+    std::string name;
+    double Mu;
+    double getMu(); 
+    std::vector <MassiveParticle> mass_particle_vec; // A vector to store MassiveParticle instance
+    void addAttractor(MassiveParticle Mass_instance);
+    void removeAttractor(MassiveParticle Mass_instance);
+    void calculateAcceleration();
+    void integrateTimestep(double timestep);
+  };
+
 
 } // end namespace
 
