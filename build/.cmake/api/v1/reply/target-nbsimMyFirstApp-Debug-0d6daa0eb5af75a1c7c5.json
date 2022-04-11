@@ -1,0 +1,151 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "bin/nbsimMyFirstApp"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"Code/CommandLineApps/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 21,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 150,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 151,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 152,
+				"parent" : 3
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
+				},
+				{
+					"fragment" : "-std=c++17"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "/workspaces/PHAS0100Assignment2/Code/3rdParty/Eigen-3.2.2.1"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/workspaces/PHAS0100Assignment2/Code/Lib"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/workspaces/PHAS0100Assignment2/build"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "phas0100assignment2::@fa14c79d6de89ebc8e0e"
+		}
+	],
+	"id" : "nbsimMyFirstApp::@b89039883a6cad3d0086",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "../../bin/libphas0100assignment2.a",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "nbsimMyFirstApp",
+	"nameOnDisk" : "nbsimMyFirstApp",
+	"paths" : 
+	{
+		"build" : "Code/CommandLineApps",
+		"source" : "Code/CommandLineApps"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Code/CommandLineApps/nbsimMyFirstApp.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

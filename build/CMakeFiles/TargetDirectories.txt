@@ -54,6 +54,7 @@
 /workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/rebuild_cache.dir
 /workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/edit_cache.dir
 /workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/test.dir
+/workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir
 /workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/install/local.dir
 /workspaces/PHAS0100Assignment2/build/Code/CommandLineApps/CMakeFiles/nbsimMyFirstApp.dir
 /workspaces/PHAS0100Assignment2/build/Testing/CMakeFiles/install/local.dir

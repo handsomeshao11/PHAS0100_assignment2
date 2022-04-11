@@ -49,8 +49,9 @@ namespace nbsim {
     position+=step;
 
     // update velocity
-    acceleration*=timestep;
-    velocity+=acceleration;
+    Eigen::Vector3d vel_incre;
+    vel_incre=timestep*acceleration;
+    velocity+=vel_incre;
   };
 
   // class MassiveParticle
@@ -71,6 +72,7 @@ namespace nbsim {
       if (mass_particle_vec[i].name == Mass_instance.name)
       {
         mass_particle_vec.erase(mass_particle_vec.begin()+i);
+        i=mass_particle_vec.size();
       };
     };
 
@@ -85,26 +87,32 @@ namespace nbsim {
 
   void MassiveParticle::calculateAcceleration()
   {
-    acc << .0,.0,.0;
-    Eigen::Vector3d ri(.0,.0,.0);
-    for( auto body_instance:mass_particle_vec)
+    acc << 0.,0.,0.;
+    Eigen::Vector3d ri;
+    // for( auto body_instance:mass_particle_vec)
+    // {
+    //   ri<<0.,0.,0.;
+    //   ri = position -body_instance.position;
+    //   acc += (-body_instance.Mu/(ri.dot(ri)))*ri;
+    // };
+    for(int i =0;i<mass_particle_vec.size();i++)
     {
-      ri = position -body_instance.position;
-      acc += -body_instance.Mu/(ri.dot(ri))*ri;
+      ri<<0.,0.,0.;
+      ri = position -mass_particle_vec[i].position;
+      acc += (-mass_particle_vec[i].Mu/(ri.squaredNorm()))*ri.normalized();
     };
   };
 
   void MassiveParticle::integrateTimestep(double timestep)
   {
-    // check acceleration
-    acc_not_zero(acc);
-    acc_is_const(acc);
     // update position
-    Eigen::Vector3d step=timestep*velocity;
+    Eigen::Vector3d step;
+    step=timestep*velocity;
     position+=step;
     // update velocity
-    acc*=timestep;
-    velocity+=acc;
+    Eigen::Vector3d vel_increment;
+    vel_increment=timestep*acc;
+    velocity+=vel_increment;
   };
 
 

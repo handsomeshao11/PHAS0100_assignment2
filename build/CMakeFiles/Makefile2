@@ -123,6 +123,7 @@ Code/clean: Code/CommandLineApps/clean
 # Directory level rules for directory Code/CommandLineApps
 
 # Recursive "all" directory target.
+Code/CommandLineApps/all: Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/all
 Code/CommandLineApps/all: Code/CommandLineApps/CMakeFiles/nbsimMyFirstApp.dir/all
 
 .PHONY : Code/CommandLineApps/all
@@ -133,6 +134,7 @@ Code/CommandLineApps/preinstall:
 .PHONY : Code/CommandLineApps/preinstall
 
 # Recursive "clean" directory target.
+Code/CommandLineApps/clean: Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/clean
 Code/CommandLineApps/clean: Code/CommandLineApps/CMakeFiles/nbsimMyFirstApp.dir/clean
 
 .PHONY : Code/CommandLineApps/clean
@@ -957,6 +959,33 @@ phas0100assignment2: Code/Lib/CMakeFiles/phas0100assignment2.dir/rule
 Code/Lib/CMakeFiles/phas0100assignment2.dir/clean:
 	$(MAKE) -f Code/Lib/CMakeFiles/phas0100assignment2.dir/build.make Code/Lib/CMakeFiles/phas0100assignment2.dir/clean
 .PHONY : Code/Lib/CMakeFiles/phas0100assignment2.dir/clean
+
+#=============================================================================
+# Target rules for target Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir
+
+# All Build rule for target.
+Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/all: Code/Lib/CMakeFiles/phas0100assignment2.dir/all
+	$(MAKE) -f Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/build.make Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/depend
+	$(MAKE) -f Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/build.make Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/workspaces/PHAS0100Assignment2/build/CMakeFiles --progress-num=13,14 "Built target solarSystemSimulator"
+.PHONY : Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/all
+
+# Build rule for subdir invocation for target.
+Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/PHAS0100Assignment2/build/CMakeFiles 6
+	$(MAKE) -f CMakeFiles/Makefile2 Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/PHAS0100Assignment2/build/CMakeFiles 0
+.PHONY : Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/rule
+
+# Convenience name for target.
+solarSystemSimulator: Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/rule
+
+.PHONY : solarSystemSimulator
+
+# clean rule for target.
+Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/clean:
+	$(MAKE) -f Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/build.make Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/clean
+.PHONY : Code/CommandLineApps/CMakeFiles/solarSystemSimulator.dir/clean
 
 #=============================================================================
 # Target rules for target Code/CommandLineApps/CMakeFiles/nbsimMyFirstApp.dir
