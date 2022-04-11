@@ -42,7 +42,7 @@ int main(int argc, char** argv)
             }
         }
     };
-    // 测试所有的body——vec的数量
+    // check the attractor list
 /*     for(int i=0; i<9;i++)
     {
     std::cout<< body_vec[i].mass_particle_vec.size()<<std::endl;        
@@ -56,7 +56,6 @@ int main(int argc, char** argv)
             body_vec[ii].calculateAcceleration();
             // std::cout<<body_vec[ii].name<<" acc are: \n";
             // std::cout<<body_vec[ii].acc<<std::endl;
-
         };
 
         for (int iii=0;iii<body_vec.size();iii++)
@@ -64,7 +63,6 @@ int main(int argc, char** argv)
             body_vec[iii].integrateTimestep(timestep);
             // std::cout<<"positions are: \n";
             // std::cout<<body_vec[iii].position<<std::endl;
-
         };
         // std::cout<<body_vec[0].position<<std::endl;
     };

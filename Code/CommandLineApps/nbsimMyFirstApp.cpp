@@ -30,6 +30,30 @@
 /**
  * \brief Demo file to check that includes and library linkage is correct.
  */
+
+double kinetic_energy(std::vector <nbsim::MassiveParticle> body_vec)
+{
+  double E_k;
+  for (int i=0; i< body_vec.size();i++)
+  {
+    E_k += 1/2*body_vec[i].Mu*(body_vec[i].getVelocity().dot(body_vec[i].getVelocity()));
+  }
+  return E_k;
+};
+
+double potential_energy(std::vector <nbsim::MassiveParticle> body_vec)
+{
+  double E_p;
+  for (int i=0; i< body_vec.size();i++)
+  {
+    for(int ii=0; ii<body_vec[0].mass_particle_vec.size();ii++)
+    {
+      E_p += -1/2*body_vec[i].getMu()*body_vec[i].mass_particle_vec[ii].getMu()/(body_vec[i].getPosition()-body_vec[i].mass_particle_vec[ii].getPosition()).norm();
+    }
+  }
+  return E_p;
+};
+
 int main(int argc, char** argv)
 {
   // 读取 data
@@ -147,6 +171,12 @@ int main(int argc, char** argv)
     //   std::cout<<"\n"<<std::endl;
     // };
 
+    // calcualte kinetic energy
+    double K_energy_initial=kinetic_energy(body_vec);
+    double P_energy_initial=potential_energy(body_vec);
+    std::cout<< K_energy_initial<<"\n"<< std::endl;
+    std::cout<< P_energy_initial<<"\n"<< std::endl;
+
     double timestep= 0.000274;
     for (int i=0;i<3650;i++)
     {
@@ -175,27 +205,11 @@ int main(int argc, char** argv)
         std::cout<<body_vec[i].position<<"\n\n";
     }
 
-    // Eigen::Vector3d pos(-0.453178, -0.56381468, 0.01805713);
-    // std::cout<<pos<<"\n\n";
-    // std::cout<<pos.normalized()<<std::endl;
+    double K_energy_end=kinetic_energy(body_vec);
+    double P_energy_end=potential_energy(body_vec);
+    std::cout<< K_energy_end<<"\n"<< std::endl;
+    std::cout<< P_energy_end<<"\n"<< std::endl;
     
 
   return 0;
 }
-
-// int other()
-// {
-// /*   double mu;
-//                     std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodieslist;
-//                     Eigen::Vector3d pos, vel;
-//                     for (auto body : nbsim::solarSystemData)
-//                     {
-//                         mu = body.mu;
-//                         pos = body.position;
-//                         vel = body.velocity;
-
-//                         std::shared_ptr<nbsim::MassiveParticle> ptr_body(new nbsim::MassiveParticle(pos, vel, mu));
-//                         bodieslist.push_back(ptr_body);
-//                     } */
-//   return 0;
-// }

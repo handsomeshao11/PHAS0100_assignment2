@@ -97,9 +97,8 @@ namespace nbsim {
     // };
     for(int i =0;i<mass_particle_vec.size();i++)
     {
-      ri<<0.,0.,0.;
       ri = position -mass_particle_vec[i].position;
-      acc += (-mass_particle_vec[i].Mu/(ri.squaredNorm()))*ri.normalized();
+      acc += (-mass_particle_vec[i].Mu/(ri.dot(ri)))*ri.normalized();
     };
   };
 
