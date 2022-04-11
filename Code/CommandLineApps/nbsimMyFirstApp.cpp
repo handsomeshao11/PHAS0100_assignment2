@@ -31,27 +31,27 @@
  * \brief Demo file to check that includes and library linkage is correct.
  */
 
-double kinetic_energy(std::vector <nbsim::MassiveParticle> body_vec)
+double kinetic_energy(std::vector <nbsim::MassiveParticle> body_vect)
 {
-  double E_k;
-  for (int i=0; i< body_vec.size();i++)
+  double E_k=0.0;
+  for (int i=0; i< body_vect.size();i++)
   {
-    E_k += 1/2*body_vec[i].Mu*(body_vec[i].getVelocity().dot(body_vec[i].getVelocity()));
+    E_k += body_vect[i].Mu*(body_vect[i].getVelocity().squaredNorm());
   }
-  return E_k;
+  return E_k/2;
 };
 
 double potential_energy(std::vector <nbsim::MassiveParticle> body_vec)
 {
-  double E_p;
+  double E_p=0.0;
   for (int i=0; i< body_vec.size();i++)
   {
     for(int ii=0; ii<body_vec[0].mass_particle_vec.size();ii++)
     {
-      E_p += -1/2*body_vec[i].getMu()*body_vec[i].mass_particle_vec[ii].getMu()/(body_vec[i].getPosition()-body_vec[i].mass_particle_vec[ii].getPosition()).norm();
+      E_p += -body_vec[i].getMu()*body_vec[i].mass_particle_vec[ii].getMu()/(body_vec[i].getPosition()-body_vec[i].mass_particle_vec[ii].getPosition()).norm();
     }
   }
-  return E_p;
+  return E_p/2;
 };
 
 int main(int argc, char** argv)
@@ -171,11 +171,13 @@ int main(int argc, char** argv)
     //   std::cout<<"\n"<<std::endl;
     // };
 
-    // calcualte kinetic energy
+    // calcualte initial total energy
     double K_energy_initial=kinetic_energy(body_vec);
     double P_energy_initial=potential_energy(body_vec);
+    double Total_energy_initial= K_energy_initial+P_energy_initial;
     std::cout<< K_energy_initial<<"\n"<< std::endl;
     std::cout<< P_energy_initial<<"\n"<< std::endl;
+    std::cout<< Total_energy_initial<<"\n"<<std::endl;
 
     double timestep= 0.000274;
     for (int i=0;i<3650;i++)
@@ -205,11 +207,13 @@ int main(int argc, char** argv)
         std::cout<<body_vec[i].position<<"\n\n";
     }
 
+    // calcualte total energy
     double K_energy_end=kinetic_energy(body_vec);
     double P_energy_end=potential_energy(body_vec);
+    double Total_energy_end= K_energy_end+P_energy_end;
     std::cout<< K_energy_end<<"\n"<< std::endl;
     std::cout<< P_energy_end<<"\n"<< std::endl;
-    
+    std::cout<< Total_energy_end<<"\n"<< std::endl;
 
   return 0;
 }

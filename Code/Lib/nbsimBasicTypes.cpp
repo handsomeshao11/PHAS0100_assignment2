@@ -87,7 +87,7 @@ namespace nbsim {
 
   void MassiveParticle::calculateAcceleration()
   {
-    acc << 0.,0.,0.;
+    acc << 0.0,0.0,0.0;
     Eigen::Vector3d ri;
     // for( auto body_instance:mass_particle_vec)
     // {
