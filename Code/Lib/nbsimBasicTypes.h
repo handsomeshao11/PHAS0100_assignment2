@@ -47,6 +47,8 @@
 #include <unsupported/Eigen/NonLinearOptimization>
 #include <stdlib.h>
 #include <vector>
+#include <set>
+#include <memory>
 namespace nbsim
 {
   void acc_not_zero(Eigen::Vector3d acceleration); // check acceleration is not 0
@@ -81,8 +83,11 @@ namespace nbsim
     double Mu;
     double getMu(); 
     std::vector <MassiveParticle> mass_particle_vec; // A vector to store MassiveParticle instance
-    void addAttractor(MassiveParticle Mass_instance);
-    void removeAttractor(MassiveParticle Mass_instance);
+    std::set<std::shared_ptr<MassiveParticle>> attractors_ptr;
+    // void addAttractor(MassiveParticle Mass_instance);
+    // void removeAttractor(MassiveParticle Mass_instance);
+    void addAttractor(std::shared_ptr<MassiveParticle> attractor_ptr);
+    void removeAttractor(std::shared_ptr<MassiveParticle> attractor_ptr);
     void calculateAcceleration();
     void integrateTimestep(double timestep);
   };

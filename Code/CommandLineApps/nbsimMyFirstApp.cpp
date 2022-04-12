@@ -63,34 +63,55 @@ int main(int argc, char** argv)
   std::string planet_name[9];
   Eigen::Vector3d init_position, init_velocity;
   double mu;
-  std::shared_ptr<nbsim::MassiveParticle> planet_ptr[9];
+  std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9];
 
   for (int i=0; i<9; i++) {
     planet_name[i]=nbsim::solarSystemData[i].name;
     init_position=nbsim::solarSystemData[i].position;
     init_velocity=nbsim::solarSystemData[i].velocity;
     mu=nbsim::solarSystemData[i].mu;
-    std::shared_ptr<nbsim::MassiveParticle> planet_ptr_i(new nbsim::MassiveParticle(planet_name[i],init_position, init_velocity,mu));
-    planet_ptr[i]=planet_ptr_i;
+    std::shared_ptr<nbsim::MassiveParticle> body_ptr_i(new nbsim::MassiveParticle(planet_name[i],init_position, init_velocity,mu));
+    bodys_ptr[i]=body_ptr_i;
 	}
-  for(int i=0; i<9; i++)
+  // check the body's information
+/*   for(int i=0; i<9; i++)
   {
-    std::cout<<planet_ptr[i]->name<<"\n"<<planet_ptr[i]->getPosition()<<"\n"<<planet_ptr[i]->getVelocity()<<"\n"<<planet_ptr[i]->getMu()<<"\n"<<std::endl;
+    std::cout<<bodys_ptr[i]->name<<"\n"<<bodys_ptr[i]->getPosition()<<"\n"<<bodys_ptr[i]->getVelocity()<<"\n"<<bodys_ptr[i]->getMu()<<"\n"<<std::endl;
+  } */
+  // add the attractors
+  for (int i=0; i<9; i++)
+  {
+		for (int ii=0; ii<9; ii++)
+    {
+      if (bodys_ptr[i]->name!=bodys_ptr[ii]->name)
+      {
+        bodys_ptr[i]->addAttractor(bodys_ptr[ii]);
+      }
+		}
+	}  
+  // calculate the acceleration and update the position and velocity
+  double step_size= 0.000274;
+  for (int i=0; i<3650; i++)
+  {
+		for (int ii=0;ii<9;ii++)
+    {
+			bodys_ptr[ii]->calculateAcceleration();
+		}
+		for (int iii=0;iii<9;iii++)
+    {
+			bodys_ptr[iii]->integrateTimestep(step_size);
+		}	
+	}
+  // cout the end of body positions
+  for (int i=0;i<9;i++)
+  {
+		std::cout<<planet_name[i]<<"\n end of position:"<<bodys_ptr[i]->getPosition().transpose()<<std::endl;
   }
-
-
-  // for (int i=0; i<9; i++)
-  // {
-	// 	for (int j=0; j<9; j++)
-  //   {
-	// 		planet_ptr[i]->addAttractor(planet_ptr[j]);
-  //     if (planet_ptr[i]==planet_ptr[j])
-  //     {
-  //       planet_ptr[i]->removeAttractor(planet_ptr[j]);
-  //     }
-	// 	}
-	// }  
-
+  // delete the memory
+/*   for (int i=0;i<9;i++)
+  {
+    delete bodys_ptr[i];
+  } */
 
   return 0;
 }

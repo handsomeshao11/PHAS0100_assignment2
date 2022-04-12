@@ -57,26 +57,26 @@ TEST_CASE( "fourth test", "[test a body move in a straight line without an attra
   };
 }
 
-TEST_CASE( "fifth test", "[acceleration should be const]" ) {
-  nbsim::MassiveParticle x1;
-  nbsim::MassiveParticle x2;
-  // initialize two instance
-  x1.Mu=1;
-  x2.Mu=1;
-  x1.position<< 1.,  .0,.0;
-  x2.position<<-1.,  .0,.0;
-  x1.velocity<< .0, 0.5,.0;
-  x2.velocity<< .0,-0.5,.0;
-  // add attractors
-  x1.addAttractor(x2);
-  x2.addAttractor(x1);
-  // calculate acceleration and update velocity and position
-  x1.calculateAcceleration();
-  x1.integrateTimestep(1.0);
-  x2.calculateAcceleration();
-  x2.integrateTimestep(1.0);
-  // calculate the distance
-  double distance=sqrt((x1.position-x2.position).dot(x1.position-x2.position)); // distance ri = 2.23607
-  REQUIRE(distance<=2.24);
-  REQUIRE(distance>=2.23);
-}
+// TEST_CASE( "fifth test", "[acceleration should be const]" ) {
+//   nbsim::MassiveParticle x1;
+//   nbsim::MassiveParticle x2;
+//   // initialize two instance
+//   x1.Mu=1;
+//   x2.Mu=1;
+//   x1.position<< 1.,  .0,.0;
+//   x2.position<<-1.,  .0,.0;
+//   x1.velocity<< .0, 0.5,.0;
+//   x2.velocity<< .0,-0.5,.0;
+//   // add attractors
+//   x1.addAttractor(x2);
+//   x2.addAttractor(x1);
+//   // calculate acceleration and update velocity and position
+//   x1.calculateAcceleration();
+//   x1.integrateTimestep(1.0);
+//   x2.calculateAcceleration();
+//   x2.integrateTimestep(1.0);
+//   // calculate the distance
+//   double distance=sqrt((x1.position-x2.position).dot(x1.position-x2.position)); // distance ri = 2.23607
+//   REQUIRE(distance<=2.24);
+//   REQUIRE(distance>=2.23);
+// }

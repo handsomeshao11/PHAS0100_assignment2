@@ -68,47 +68,58 @@ namespace nbsim {
     return Mu;
   };
 
-  void MassiveParticle::addAttractor(MassiveParticle Mass_instance)
+  // void MassiveParticle::addAttractor(MassiveParticle Mass_instance)
+  // {
+  //   mass_particle_vec.push_back(Mass_instance);
+  // };
+  void MassiveParticle::addAttractor(std::shared_ptr<MassiveParticle> attractor)
   {
-    mass_particle_vec.push_back(Mass_instance);
+      attractors_ptr.insert(attractor);
   };
 
-  void MassiveParticle::removeAttractor(MassiveParticle Mass_instance)
+  void MassiveParticle::removeAttractor(std::shared_ptr<MassiveParticle> attractor)
   {
-    for( int i=0; i<mass_particle_vec.size();i++)
-    {
-      if (mass_particle_vec[i].name == Mass_instance.name)
-      {
-        mass_particle_vec.erase(mass_particle_vec.begin()+i);
-        i=mass_particle_vec.size();
-      };
-    };
-
-    // for( auto instance:mass_particle_vec)
-    // {
-    //   if (instance.name == Mass_instance.name)
-    //   {
-    //     mass_particle_vec.erase(instance);
-    //   };
-    // };
+      attractors_ptr.erase(attractor);
   };
 
+  // void MassiveParticle::removeAttractor(MassiveParticle Mass_instance)
+  // {
+  //   for( int i=0; i<mass_particle_vec.size();i++)
+  //   {
+  //     if (mass_particle_vec[i].name == Mass_instance.name)
+  //     {
+  //       mass_particle_vec.erase(mass_particle_vec.begin()+i);
+  //       i=mass_particle_vec.size();
+  //     };
+  //   };
+  // };
   void MassiveParticle::calculateAcceleration()
   {
-    acc << 0.0,0.0,0.0;
     Eigen::Vector3d ri;
-    // for( auto body_instance:mass_particle_vec)
-    // {
-    //   ri<<0.,0.,0.;
-    //   ri = position -body_instance.position;
-    //   acc += (-body_instance.Mu/(ri.dot(ri)))*ri;
-    // };
-    for(int i =0;i<mass_particle_vec.size();i++)
+    acc<<0.0,0.0,0.0;
+    for(auto atr:attractors_ptr)
     {
-      ri = position -mass_particle_vec[i].position;
-      acc += (-mass_particle_vec[i].Mu/(ri.dot(ri)))*ri.normalized();
-    };
+        ri=getPosition()-atr->getPosition();
+        acc+=-atr->getMu()/ri.squaredNorm()*ri.normalized();
+    }
   };
+
+  // void MassiveParticle::calculateAcceleration()
+  // {
+  //   acc << 0.0,0.0,0.0;
+  //   Eigen::Vector3d ri;
+  //   // for( auto body_instance:mass_particle_vec)
+  //   // {
+  //   //   ri<<0.,0.,0.;
+  //   //   ri = position -body_instance.position;
+  //   //   acc += (-body_instance.Mu/(ri.dot(ri)))*ri;
+  //   // };
+  //   for(int i =0;i<mass_particle_vec.size();i++)
+  //   {
+  //     ri = position -mass_particle_vec[i].position;
+  //     acc += (-mass_particle_vec[i].Mu/(ri.dot(ri)))*ri.normalized();
+  //   };
+  // };
 
   void MassiveParticle::integrateTimestep(double timestep)
   {
