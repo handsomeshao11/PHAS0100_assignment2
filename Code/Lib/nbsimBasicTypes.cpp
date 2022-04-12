@@ -55,6 +55,14 @@ namespace nbsim {
   };
 
   // class MassiveParticle
+  MassiveParticle::MassiveParticle(std::string init_name,Eigen::Vector3d init_position,Eigen::Vector3d init_velocity,double init_Mu)
+  {
+    name=init_name;
+    position=init_position;
+    velocity=init_velocity;
+    Mu=init_Mu;
+  };
+
   double MassiveParticle::getMu()
   {
     return Mu;

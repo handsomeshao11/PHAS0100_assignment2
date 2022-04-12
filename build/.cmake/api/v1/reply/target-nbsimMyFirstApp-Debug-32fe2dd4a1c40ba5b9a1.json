@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/nbsimCommandLineArgsTest"
+			"path" : "bin/nbsimMyFirstApp"
 		}
 	],
 	"backtrace" : 1,
@@ -16,7 +16,7 @@
 		],
 		"files" : 
 		[
-			"Testing/CMakeLists.txt",
+			"Code/CommandLineApps/CMakeLists.txt",
 			"CMakeLists.txt"
 		],
 		"nodes" : 
@@ -27,13 +27,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 24,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 25,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
@@ -56,12 +56,6 @@
 				"file" : 1,
 				"line" : 152,
 				"parent" : 3
-			},
-			{
-				"command" : 2,
-				"file" : 1,
-				"line" : 161,
-				"parent" : 3
 			}
 		]
 	},
@@ -71,7 +65,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
+					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
 				},
 				{
 					"fragment" : "-std=c++17"
@@ -90,17 +84,12 @@
 				{
 					"backtrace" : 6,
 					"path" : "/workspaces/PHAS0100Assignment2/build"
-				},
-				{
-					"backtrace" : 7,
-					"path" : "/workspaces/PHAS0100Assignment2/Testing"
 				}
 			],
 			"language" : "CXX",
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -111,13 +100,13 @@
 			"id" : "phas0100assignment2::@fa14c79d6de89ebc8e0e"
 		}
 	],
-	"id" : "nbsimCommandLineArgsTest::@ea41f389d6241025cb5e",
+	"id" : "nbsimMyFirstApp::@b89039883a6cad3d0086",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g",
+				"fragment" : "-Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g",
 				"role" : "flags"
 			},
 			{
@@ -126,18 +115,18 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "../bin/libphas0100assignment2.a",
+				"fragment" : "../../bin/libphas0100assignment2.a",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "nbsimCommandLineArgsTest",
-	"nameOnDisk" : "nbsimCommandLineArgsTest",
+	"name" : "nbsimMyFirstApp",
+	"nameOnDisk" : "nbsimMyFirstApp",
 	"paths" : 
 	{
-		"build" : "Testing",
-		"source" : "Testing"
+		"build" : "Code/CommandLineApps",
+		"source" : "Code/CommandLineApps"
 	},
 	"sourceGroups" : 
 	[
@@ -145,8 +134,7 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -155,13 +143,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Testing/nbsimCommandLineArgsTest.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "Testing/nbsimCatchMain.cpp",
+			"path" : "Code/CommandLineApps/nbsimMyFirstApp.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

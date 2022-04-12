@@ -362,35 +362,35 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "nbsimBasicTest::@ea41f389d6241025cb5e",
-					"jsonFile" : "target-nbsimBasicTest-Debug-d22eab262cc7cb4e72c0.json",
+					"jsonFile" : "target-nbsimBasicTest-Debug-00787d8587618871ad07.json",
 					"name" : "nbsimBasicTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "nbsimCommandLineArgsTest::@ea41f389d6241025cb5e",
-					"jsonFile" : "target-nbsimCommandLineArgsTest-Debug-632e1aad0dddd96231a4.json",
+					"jsonFile" : "target-nbsimCommandLineArgsTest-Debug-ddb515c7c3fc5b1753b4.json",
 					"name" : "nbsimCommandLineArgsTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "nbsimMyFirstApp::@b89039883a6cad3d0086",
-					"jsonFile" : "target-nbsimMyFirstApp-Debug-0d6daa0eb5af75a1c7c5.json",
+					"jsonFile" : "target-nbsimMyFirstApp-Debug-32fe2dd4a1c40ba5b9a1.json",
 					"name" : "nbsimMyFirstApp",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "phas0100assignment2::@fa14c79d6de89ebc8e0e",
-					"jsonFile" : "target-phas0100assignment2-Debug-563370ed3f159f54c8aa.json",
+					"jsonFile" : "target-phas0100assignment2-Debug-eb85ce61600d47d45f94.json",
 					"name" : "phas0100assignment2",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "solarSystemSimulator::@b89039883a6cad3d0086",
-					"jsonFile" : "target-solarSystemSimulator-Debug-5e33baea1a566526901d.json",
+					"jsonFile" : "target-solarSystemSimulator-Debug-f4e7c796f15dc4ff09ea.json",
 					"name" : "solarSystemSimulator",
 					"projectIndex" : 0
 				}

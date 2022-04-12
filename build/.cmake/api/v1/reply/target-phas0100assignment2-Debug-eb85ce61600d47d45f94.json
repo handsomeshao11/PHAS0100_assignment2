@@ -59,7 +59,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
+					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
 				},
 				{
 					"fragment" : "-std=c++17"

@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/nbsimBasicTest"
+			"path" : "bin/nbsimCommandLineArgsTest"
 		}
 	],
 	"backtrace" : 1,
@@ -71,7 +71,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
+					"fragment" : " -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g  "
 				},
 				{
 					"fragment" : "-std=c++17"
@@ -111,13 +111,13 @@
 			"id" : "phas0100assignment2::@fa14c79d6de89ebc8e0e"
 		}
 	],
-	"id" : "nbsimBasicTest::@ea41f389d6241025cb5e",
+	"id" : "nbsimCommandLineArgsTest::@ea41f389d6241025cb5e",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g",
+				"fragment" : "-Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-ignored-attributes -fopenmp -g",
 				"role" : "flags"
 			},
 			{
@@ -132,8 +132,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "nbsimBasicTest",
-	"nameOnDisk" : "nbsimBasicTest",
+	"name" : "nbsimCommandLineArgsTest",
+	"nameOnDisk" : "nbsimCommandLineArgsTest",
 	"paths" : 
 	{
 		"build" : "Testing",
@@ -155,7 +155,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Testing/nbsimBasicTest.cpp",
+			"path" : "Testing/nbsimCommandLineArgsTest.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

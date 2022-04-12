@@ -58,6 +58,7 @@ namespace nbsim
   {
     public:
     Particle(){};
+    // ~Particle();
     Eigen::Vector3d position;
     Eigen::Vector3d velocity;
     Eigen::Vector3d acc;
@@ -73,6 +74,9 @@ namespace nbsim
     double G = 6.6743e-11; // units m3 kg-1 s-2 
 
     public:
+    MassiveParticle(){};
+    MassiveParticle(std::string init_name,Eigen::Vector3d init_position,Eigen::Vector3d init_velocity,double init_Mu);
+    // ~MassiveParticle();
     std::string name;
     double Mu;
     double getMu(); 
