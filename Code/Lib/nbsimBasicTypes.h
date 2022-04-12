@@ -82,7 +82,7 @@ namespace nbsim
     std::string name;
     double Mu;
     double getMu(); 
-    std::vector <MassiveParticle> mass_particle_vec; // A vector to store MassiveParticle instance
+    // std::vector <MassiveParticle> mass_particle_vec; // A vector to store MassiveParticle instance
     std::set<std::shared_ptr<MassiveParticle>> attractors_ptr;
     // void addAttractor(MassiveParticle Mass_instance);
     // void removeAttractor(MassiveParticle Mass_instance);
