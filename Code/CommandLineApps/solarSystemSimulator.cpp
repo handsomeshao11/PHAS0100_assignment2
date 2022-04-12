@@ -16,32 +16,37 @@
 // 
 #include "nbsimBasicTypes.h"
 
-// calculate kinetic energy
-double kinetic_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
+namespace nbsim
 {
-  double E_k=0.0;
-  for (int i=0; i< bodys_ptr->use_count();i++)
+  // calculate kinetic energy
+  double kinetic_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
   {
-    E_k += (bodys_ptr[i]->getMu()*(bodys_ptr[i]->getVelocity().squaredNorm()))/2;
-  }
-  return E_k;
-};
-// calculate potential energy
-double potential_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
-{
-  double E_p=0.0;
-  for (int i=0; i< bodys_ptr->use_count();i++)
-  {
-    for(int ii=0; ii<bodys_ptr[0]->attractors_ptr.size();ii++)
+    double E_k=0.0;
+    for (int i=0; i< bodys_ptr->use_count();i++)
     {
-      if (bodys_ptr[i]!=bodys_ptr[ii])
+      E_k += (bodys_ptr[i]->getMu()*(bodys_ptr[i]->getVelocity().squaredNorm()))/2;
+    }
+    return E_k;
+  };
+
+  // calculate potential energy
+  double potential_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
+  {
+    double E_p=0.0;
+    for (int i=0; i< bodys_ptr->use_count();i++)
+    {
+      for(int ii=0; ii<bodys_ptr[0]->attractors_ptr.size();ii++)
       {
-        E_p += (-bodys_ptr[i]->getMu()*bodys_ptr[ii]->getMu()/(bodys_ptr[i]->getPosition()-bodys_ptr[ii]->getPosition()).norm())/2;
+        if (bodys_ptr[i]!=bodys_ptr[ii])
+        {
+          E_p += (-bodys_ptr[i]->getMu()*bodys_ptr[ii]->getMu()/(bodys_ptr[i]->getPosition()-bodys_ptr[ii]->getPosition()).norm())/2;
+        }
       }
     }
-  }
-  return E_p;
-};
+    return E_p;
+  };
+}
+
 // main function
 int main(int argc, char** argv)
 {
@@ -79,8 +84,8 @@ int main(int argc, char** argv)
 		}
 	}  
   // calculate the initial energy
-  double K_energy_init=kinetic_energy(bodys_ptr);
-  double P_energy_init=potential_energy(bodys_ptr);
+  double K_energy_init=nbsim::kinetic_energy(bodys_ptr);
+  double P_energy_init=nbsim::potential_energy(bodys_ptr);
   double Total_energy_init= K_energy_init+P_energy_init;
   // calculate the acceleration and update the position and velocity
   double step_size= 0.000274;
@@ -108,8 +113,8 @@ int main(int argc, char** argv)
   } */
 
   // // calcualte the end of total energy
-  double K_energy_end=kinetic_energy(bodys_ptr);
-  double P_energy_end=potential_energy(bodys_ptr);
+  double K_energy_end=nbsim::kinetic_energy(bodys_ptr);
+  double P_energy_end=nbsim::potential_energy(bodys_ptr);
   double Total_energy_end= K_energy_end+P_energy_end;
   std::cout<< "System initial energy are :"
   << " kinetic energy is "<<K_energy_init

@@ -29,6 +29,12 @@ namespace nbsim {
 
   }
   // class Particle
+  Particle::Particle(Eigen::Vector3d initial_position,Eigen::Vector3d initial_velocity)
+  {
+    position=initial_position;
+    velocity=initial_velocity;
+  };
+
   Eigen::Vector3d Particle::getPosition()
   {
     return position;

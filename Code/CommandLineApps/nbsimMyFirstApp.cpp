@@ -22,6 +22,8 @@
 #include <chrono>
 #include <ctime>
 #include <thread>
+#include <iostream>
+#include <random>
 
 // Example, header-only library, included in project for simplicity's sake.
 #include <Eigen/Dense>
@@ -35,95 +37,50 @@
  * \brief Demo file to check that includes and library linkage is correct.
  */
 
-double kinetic_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
+namespace nbsim
 {
-  double E_k=0.0;
-  for (int i=0; i< bodys_ptr->use_count();i++)
+  
+  std::vector<std::shared_ptr<nbsim::MassiveParticle>> simulate_body()
   {
-    E_k += (bodys_ptr[i]->getMu()*(bodys_ptr[i]->getVelocity().squaredNorm()))/2;
-  }
-  return E_k;
-};
-
-double potential_energy(std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9])
-{
-  double E_p=0.0;
-  for (int i=0; i< bodys_ptr->use_count();i++)
-  {
-    for(int ii=0; ii<bodys_ptr[0]->attractors_ptr.size();ii++)
+    // use random number
+    std::default_random_engine e;
+    std::uniform_real_distribution<double> rand_num(1e-10, 50.0);
+    std::uniform_real_distribution<double> rand_angle(-3.1416, 3.1416);
+    
+    int tot_num=2000;
+    double centre_Mu=rand_num(e);
+    Eigen::Vector3d centre_position(0.0,0.0,0.0),centre_velocity(0.0,0.0,0.0);
+    // initialize the first body
+    std::vector<std::shared_ptr<nbsim::MassiveParticle>> sim_particles;
+    std::shared_ptr<nbsim::MassiveParticle> first_ptr(new nbsim::MassiveParticle("-",centre_position, centre_velocity,centre_Mu));
+    sim_particles.push_back(first_ptr);
+    // initialize other bodies
+    Eigen::Vector3d ini_position, ini_velocity;
+    double angle=rand_angle(e);
+    double r;
+    double mu;
+    for (int i=1; i<tot_num; i++) 
     {
-      if (bodys_ptr[i]!=bodys_ptr[ii])
-      {
-        E_p += (-bodys_ptr[i]->getMu()*bodys_ptr[ii]->getMu()/(bodys_ptr[i]->getPosition()-bodys_ptr[ii]->getPosition()).norm())/2;
-      }
+      r=rand_num(e);
+      ini_position<< r*sin(angle), r*cos(angle), 0.0;
+      ini_velocity<< -sin(angle)/sqrt(r), cos(angle)/sqrt(r), 0.0;
+      mu=rand_num(e);
+      std::shared_ptr<nbsim::MassiveParticle> body_ptr_i(new nbsim::MassiveParticle("-",ini_position, ini_velocity,mu));
+      sim_particles.push_back(body_ptr_i);
     }
-  }
-  return E_p;
-};
+    return sim_particles;
+  };
+
+}
 
 int main(int argc, char** argv)
 {
-  std::string bodys_name[9];
-  Eigen::Vector3d init_position, init_velocity;
-  double mu;
-  std::shared_ptr<nbsim::MassiveParticle> bodys_ptr[9];
-  // initialize the bodies
-  for (int i=0; i<9; i++) {
-    bodys_name[i]=nbsim::solarSystemData[i].name;
-    init_position=nbsim::solarSystemData[i].position;
-    init_velocity=nbsim::solarSystemData[i].velocity;
-    mu=nbsim::solarSystemData[i].mu;
-    std::shared_ptr<nbsim::MassiveParticle> body_ptr_i(new nbsim::MassiveParticle(bodys_name[i],init_position, init_velocity,mu));
-    bodys_ptr[i]=body_ptr_i;
-	}
-  // check the body's information
-/*   for(int i=0; i<9; i++)
+  std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodies;
+  bodies = nbsim::simulate_body();
+  for (int i=0;i<10;i++)
   {
-    std::cout<<bodys_ptr[i]->name<<"\n"<<bodys_ptr[i]->getPosition()<<"\n"<<bodys_ptr[i]->getVelocity()<<"\n"<<bodys_ptr[i]->getMu()<<"\n"<<std::endl;
-  } */
-  // add the attractors
-  for (int i=0; i<9; i++)
-  {
-		for (int ii=0; ii<9; ii++)
-    {
-      if (bodys_ptr[i]->name!=bodys_ptr[ii]->name)
-      {
-        bodys_ptr[i]->addAttractor(bodys_ptr[ii]);
-      }
-		}
-	}  
-  // calculate the acceleration and update the position and velocity
-  double step_size= 0.000274;
-  for (int i=0; i<3650; i++)
-  {
-		for (int ii=0;ii<9;ii++)
-    {
-			bodys_ptr[ii]->calculateAcceleration();
-		}
-		for (int iii=0;iii<9;iii++)
-    {
-			bodys_ptr[iii]->integrateTimestep(step_size);
-		}	
-	}
-  // cout the end of body positions
-  for (int i=0;i<9;i++)
-  {
-		std::cout<<bodys_name[i]<<"\n end of position:"<<bodys_ptr[i]->getPosition().transpose()<<std::endl;
+    std::cout<<bodies[i]->getPosition().transpose()<<" // "
+    <<bodies[i]->getVelocity().transpose()<<"\n"<<std::endl;
   }
-  // delete the memory
-/*   for (int i=0;i<9;i++)
-  {
-    delete bodys_ptr[i];
-  } */
-  // std::cout<<bodys_ptr->use_count()<<std::endl;
-
-  // // calcualte total energy
-  double K_energy_end=kinetic_energy(bodys_ptr);
-  double P_energy_end=potential_energy(bodys_ptr);
-  double Total_energy_end= K_energy_end+P_energy_end;
-  std::cout<< K_energy_end<<"\n"<< std::endl;
-  std::cout<< P_energy_end<<"\n"<< std::endl;
-  std::cout<< Total_energy_end<<"\n"<< std::endl;
-
   return 0;
 }

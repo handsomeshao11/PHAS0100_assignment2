@@ -60,6 +60,7 @@ namespace nbsim
   {
     public:
     Particle(){};
+    Particle(Eigen::Vector3d initial_position,Eigen::Vector3d initial_velocity);
     // ~Particle();
     Eigen::Vector3d position;
     Eigen::Vector3d velocity;
