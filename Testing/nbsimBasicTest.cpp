@@ -19,6 +19,8 @@
 #include <iostream>
 #include <vector>
 #include <Eigen/Dense>
+#include <math.h>
+#define _USE_MATH_DEFINES
 
 TEST_CASE( "first test", "[acceleration is not zero]" ) {
   Eigen::Vector3d pos(1,0,0);
@@ -52,14 +54,14 @@ TEST_CASE( "third test", "[test move with a fictitious centripetal acceleration]
   nbsim::Particle k3;
   k3.position=pos;
   k3.velocity=vel;
-  double timestep=0.001, time=1;
-  for(double i=0;i<time;i+=timestep)
+  double time_interval=0.001, end_time=2*M_PI;
+  Eigen::Vector3d acc;
+  for(double i=0;i<end_time;i+=time_interval)
   {
-    Eigen::Vector3d centripetal_acceleration=-k3.getPosition();
-    k3.integrateTimestep(centripetal_acceleration,timestep);
+    acc=-k3.getPosition();
+    k3.integrateTimestep(acc,time_interval);
   }
-  REQUIRE(k3.getVelocity().isApprox(vel,0.01));
-  REQUIRE(k3.getPosition().isApprox(pos,0.01));
+  REQUIRE((k3.getVelocity().isApprox(vel,0.01) && k3.getPosition().isApprox(pos,0.01))==1);
 }
 
 TEST_CASE( "fourth test", "[test a body move in a straight line without an attractor]" ) {

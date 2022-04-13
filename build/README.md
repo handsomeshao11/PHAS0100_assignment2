@@ -28,7 +28,8 @@ The function of files:
 Code/lib/nbsimBasicTypes.cpp and Code/lib/nbsimBasicTypes.h  -- The class and some functions of initialize a body.
 Code/CommandLineApps/solarSystemSimulator.cpp -- Run the solar system body with a timestep and a number of year.
 Code/CommandLineApps/nbsimMyFirstApp.cpp -- Run 2000 bodies by initialized randomly with a timestep, a number of year and a number of machine processors.
-TestingnbsimBasicTest.cpp -- Check the nbsimBasicTypes.cpp and nbsimBasicTypes.h can be used correctly.
+Testing/nbsimBasicTest.cpp -- Check the nbsimBasicTypes.cpp and nbsimBasicTypes.h can be used correctly.
+0.000274_timestep_1_year.png -- The result of 0.000274 timestep and 1 year
 
 Open the PHAS0100Assignment2 folder.
 
@@ -89,32 +90,32 @@ There are cases with different time steps and 100 years:
 case 0: timestep 0.0000274  num_time 100
 
 System final energy are : kinetic energy is 0.135274, potential energy is -0.303163, total_energy is -0.16789
-CPU time used: 335077.56 ms
-Wall clock time has passed: 335077.56 ms
+CPU time used: 66985.65 ms
+Wall clock time has passed: 66985.76 ms
 
 case 1: timestep 0.0001 num_time 100
 
 System final energy are : kinetic energy is 0.149917, potential energy is -0.316279, total_energy is -0.166362
-CPU time used: 478510.46 ms
-Wall clock time has passed: 478510.46 ms
+CPU time used: 68466.06 ms
+Wall clock time has passed: 68466.15 ms
 
 case 2: timestep 0.001 num_time 100
 
 System final energy are : kinetic energy is 0.182478, potential energy is -0.324498, total_energy is -0.14202
-CPU time used: 507169.78 ms
-Wall clock time has passed: 507169.78 ms
+CPU time used: 69676.02 ms
+Wall clock time has passed: 69676.09 ms
 
 case 3: timestep 0.00274 num_time 100
 
 System final energy are : kinetic energy is 0.0876923, potential energy is -0.182417, total_energy is -0.0947247
-CPU time used: 398754.43 ms
-Wall clock time has passed: 398754.43 ms
+CPU time used: 67796.15 ms
+Wall clock time has passed: 67796.21 ms
 
 case 4: timestep 0.0274 num_time 100
 
-System final energy are : kinetic energy is 0.0439279, potential energy is -0.0566199, total_energy is -0.012692
-CPU time used: 354186.91 ms
-Wall clock time has passed: 354186.91 ms
+System final energy are : kinetic energy is 0.00912975, potential energy is -0.0209039, total_energy is -0.0117742
+CPU time used: 67082.10 ms
+Wall clock time has passed: 67082.55 ms
 
 From the result, the case 0 with timestep 0.0000274, number of year 100 has the best accuracy and a great time. 
 More result you can use the solarSystemSimulator.cpp project.
