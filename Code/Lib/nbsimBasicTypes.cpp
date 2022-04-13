@@ -28,6 +28,7 @@ namespace nbsim {
     throw std::logic_error("Input acceleration type is not const.");// ！！！ debug
 
   }
+
   // class Particle
   Particle::Particle(Eigen::Vector3d initial_position,Eigen::Vector3d initial_velocity)
   {

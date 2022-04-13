@@ -28,11 +28,23 @@ TEST_CASE( "first test", "[acceleration is not zero]" ) {
   REQUIRE_THROWS( k2.integrateTimestep(acc, 1.0));
 }
 
-TEST_CASE( "second test", "[acceleration should be const]" ) {
+TEST_CASE( "second test", "[move with const acceleration]" ) {
   Eigen::Vector3d acc(1,0,0);
+  Eigen::Vector3d pos(0,1,0);
+  Eigen::Vector3d vel(0,0,0);
   nbsim::Particle k1;
-  REQUIRE( 1==1);
-  // REQUIRE_THROWS( k1.integrateTimestep(acc, 1.0)); //now it is failed, the program to be finished
+  k1.position=pos;
+  k1.velocity=vel;
+  k1.integrateTimestep(acc,1.0);
+  pos+=1.0*vel;
+  vel+=1.0*acc;
+  REQUIRE(k1.getPosition().isApprox(pos,0.01));
+  REQUIRE(k1.getVelocity().isApprox(vel,0.01));
+  k1.integrateTimestep(acc,1.0);
+  pos+=1.0*vel;
+  vel+=1.0*acc;
+  REQUIRE(k1.getPosition().isApprox(pos,0.01));
+  REQUIRE(k1.getVelocity().isApprox(vel,0.01));
 }
 
 TEST_CASE( "third test", "[test a fictitious centripetal acceleration]" ) {
@@ -57,26 +69,19 @@ TEST_CASE( "fourth test", "[test a body move in a straight line without an attra
   };
 }
 
-// TEST_CASE( "fifth test", "[acceleration should be const]" ) {
-//   nbsim::MassiveParticle x1;
-//   nbsim::MassiveParticle x2;
-//   // initialize two instance
-//   x1.Mu=1;
-//   x2.Mu=1;
-//   x1.position<< 1.,  .0,.0;
-//   x2.position<<-1.,  .0,.0;
-//   x1.velocity<< .0, 0.5,.0;
-//   x2.velocity<< .0,-0.5,.0;
-//   // add attractors
-//   x1.addAttractor(x2);
-//   x2.addAttractor(x1);
-//   // calculate acceleration and update velocity and position
-//   x1.calculateAcceleration();
-//   x1.integrateTimestep(1.0);
-//   x2.calculateAcceleration();
-//   x2.integrateTimestep(1.0);
-//   // calculate the distance
-//   double distance=sqrt((x1.position-x2.position).dot(x1.position-x2.position)); // distance ri = 2.23607
-//   REQUIRE(distance<=2.24);
-//   REQUIRE(distance>=2.23);
-// }
+TEST_CASE( "fifth test", "[two bodies remain at a distance]" ) {
+  Eigen::Vector3d x1(1.,0.,0.),v1(0.,0.5,0.),x2(-1.,0.,0.),v2(0.,-0.5,0.);
+  std::shared_ptr<nbsim::MassiveParticle> first(new nbsim::MassiveParticle("-",x1,v1,1.0));
+  std::shared_ptr<nbsim::MassiveParticle> second(new nbsim::MassiveParticle("-",x2,v2,1.0));
+  first->addAttractor(second);
+  second->addAttractor(first);
+  for (int i=0;i<4;i++)
+  {
+    first->calculateAcceleration();
+    second->calculateAcceleration();
+    first->integrateTimestep(0.5);
+    second->integrateTimestep(0.5);
+    REQUIRE((first->getPosition()-second->getPosition()).norm()<2.3);
+    REQUIRE((first->getPosition()-second->getPosition()).norm()>1.7);
+  }
+}

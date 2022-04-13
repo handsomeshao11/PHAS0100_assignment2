@@ -54,8 +54,6 @@ namespace nbsim
   void acc_not_zero(Eigen::Vector3d acceleration); // check acceleration is not 0
   void acc_is_const(Eigen::Vector3d acceleration); // check acceleration is const
 
-  
-
   class Particle
   {
     public:
