@@ -39,7 +39,7 @@
 
 namespace nbsim
 {
-  
+  // a vector to store 2000 massive particles 
   std::vector<std::shared_ptr<nbsim::MassiveParticle>> simulate_body()
   {
     // use random number
@@ -70,26 +70,26 @@ namespace nbsim
     }
     return sim_particles;
   };
+  // calculate kinetic energy
   double kinetic_energy(std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodies)
   {
     double E_k=0.0;
-    #pragma omp parallel for
+    #pragma omp parallel for reduction(+: E_k)
     for (int i=0; i< bodies.size();i++)
     {
-      #pragma omp critical
       {
         E_k += (bodies[i]->getMu()*(bodies[i]->getVelocity().squaredNorm()))/2;
       }
     }
     return E_k;
   };
-
   // calculate potential energy
   double potential_energy(std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodies)
   {
     double E_p=0.0;
     for (int i=0; i< bodies.size();i++)
     {
+      #pragma omp parallel for reduction(+: E_p)
       for(int ii=0; ii<bodies[0]->attractors_ptr.size();ii++)
       {
         if (bodies[i]!=bodies[ii])
@@ -100,10 +100,59 @@ namespace nbsim
     }
     return E_p;
   };
+
+  void helpmessage()
+  {
+    std::cout<<" -- Help message"<<"\n"
+             <<"    This is the solar system simulator.\n"
+             <<"    You can choose the timestep(unit year), and numbers of timestep(unit year) to see the beginning and the end of the bodies in the solar system.\n"
+             <<"    You can input two arguments in the terminal: ./bin/solarSystemSimulator (timestep) (number of timestep, must be double) (number of processors, must be int)\n"
+             <<"    Then the program print the the beginning and the end of the bodies, their energy, running time and the number of processors have been used.\n"
+             <<"    For example: ./bin/solarSystemSimulator 0.000274 1.0 8\n\n"
+             <<std::endl;
+  };
+  
+  void errormessage()
+  {
+    std::cout<<" -- Error message"<<"\n"
+             <<"    You can input:\n"
+             <<"    ./bin/solarSystemSimulator -help\n"
+             <<"    or\n"
+             <<"    ./bin/solarSystemSimulator -h\n"
+             <<"    to get help message."<<std::endl;
+  };
 }
 
 int main(int argc, char** argv)
 {
+  // terminal input 0 arg, like: ./bin/solarSystemSimulator
+  if (argc==1)
+  {
+    nbsim::helpmessage();
+  }
+  // terminal input 1 arg
+  else if (argc==2)
+  {
+    std::string help =argv[1];
+    if (help =="-help"||help =="-h")
+    {
+      nbsim::helpmessage();
+    }
+    else
+    {
+      std::cout<<"Error: Input arguments are not enough.\n\n";
+      nbsim::errormessage();
+    }
+  }
+  // terminal input 4 arg, like: ./bin/solarSystemSimulator 0.000274 1 16 1
+  else if (argc>=5)
+  {
+    std::cout<<"Error: Input arguments are more then needed.\n\n";
+    nbsim::errormessage();
+  }
+  // terminal input 2 or 3 arg
+  else if (argc==4)
+  {
   // start of the clock
   std::clock_t clock_start = std::clock();
   auto chrono_start = std::chrono::high_resolution_clock::now();
@@ -111,6 +160,7 @@ int main(int argc, char** argv)
   std::vector<std::shared_ptr<nbsim::MassiveParticle>> bodies;
   bodies = nbsim::simulate_body();
   #ifdef DEBUG_ON
+  // test the initialize of massive body
   for (int i=0;i<bodies.size();i++)
   {
     std::cout<<bodies[i]->getPosition().transpose()<<" // "
@@ -128,16 +178,18 @@ int main(int argc, char** argv)
         // bodies[i]->addAttractor(bodies[ii]);
       }
 		}
-	}  
+	} 
   // calculate the initial energy
   double K_energy_init=nbsim::kinetic_energy(bodies);
   double P_energy_init=nbsim::potential_energy(bodies);
   double Total_energy_init= K_energy_init+P_energy_init;
   // calculate the acceleration and update the position and velocity
-  double step_size= 0.000274;
-  omp_set_num_threads(8);
+  double step_size=atof(argv[1]);
+  int step_num= atoi(argv[2])*10;
+  int pro_num= atoi(argv[3]);
+  omp_set_num_threads(pro_num);
   #pragma omp parallel
-  for (int i=0; i<10; i++)
+  for (int i=0; i<step_num; i++)
   {
     #pragma omp for 
 		for (int ii=0;ii<2000;ii++)
@@ -150,14 +202,6 @@ int main(int argc, char** argv)
 			bodies[iii]->integrateTimestep(step_size);
 		}	
 	}
-  // cout the end of body positions
-  #pragma omp parallel for
-  for (int i=0;i<bodies.size();i++)
-  {
-		std::cout<<bodies[i]->name<<"\n end of position:"<<bodies[i]->getPosition().transpose()<<std::endl;
-  }
-  std::cout<<std::endl;
-
   // calcualte the end of total energy
   double K_energy_end=nbsim::kinetic_energy(bodies);
   double P_energy_end=nbsim::potential_energy(bodies);
@@ -170,7 +214,6 @@ int main(int argc, char** argv)
   << " kinetic energy is "<< K_energy_end
   << ", potential energy is "<< P_energy_end
   << ", total_energy is "<< Total_energy_end<<"\n"<< std::endl;
-
   // end of the clock
   std::clock_t clock_end = std::clock();
   auto chrono_end = std::chrono::high_resolution_clock::now();
@@ -184,4 +227,5 @@ int main(int argc, char** argv)
   std::cout<<"Processor number: "<<nProcessors<<std::endl;
 
   return 0;
+  }
 }

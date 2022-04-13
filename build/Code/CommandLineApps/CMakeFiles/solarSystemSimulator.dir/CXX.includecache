@@ -1111,7 +1111,11 @@ nbsimExceptionMacro.h
 -
 iostream
 -
+stdio.h
+-
 stdlib.h
+-
+omp.h
 -
 vector
 -

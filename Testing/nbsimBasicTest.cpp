@@ -28,7 +28,7 @@ TEST_CASE( "first test", "[acceleration is not zero]" ) {
   REQUIRE_THROWS( k2.integrateTimestep(acc, 1.0));
 }
 
-TEST_CASE( "second test", "[move with const acceleration]" ) {
+TEST_CASE( "second test", "[test move with const acceleration]" ) {
   Eigen::Vector3d acc(1,0,0);
   Eigen::Vector3d pos(0,1,0);
   Eigen::Vector3d vel(0,0,0);
@@ -47,9 +47,19 @@ TEST_CASE( "second test", "[move with const acceleration]" ) {
   REQUIRE(k1.getVelocity().isApprox(vel,0.01));
 }
 
-TEST_CASE( "third test", "[test a fictitious centripetal acceleration]" ) {
-  // to be finished
-  REQUIRE( 1==1);
+TEST_CASE( "third test", "[test move with a fictitious centripetal acceleration]" ) {
+  Eigen::Vector3d pos(1,0,0),vel(0,1,0);
+  nbsim::Particle k3;
+  k3.position=pos;
+  k3.velocity=vel;
+  double timestep=0.001, time=1;
+  for(double i=0;i<time;i+=timestep)
+  {
+    Eigen::Vector3d centripetal_acceleration=-k3.getPosition();
+    k3.integrateTimestep(centripetal_acceleration,timestep);
+  }
+  REQUIRE(k3.getVelocity().isApprox(vel,0.01));
+  REQUIRE(k3.getPosition().isApprox(pos,0.01));
 }
 
 TEST_CASE( "fourth test", "[test a body move in a straight line without an attractor]" ) {
